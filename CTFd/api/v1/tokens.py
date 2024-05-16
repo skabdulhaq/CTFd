@@ -153,3 +153,32 @@ class TokenDetail(Resource):
         db.session.close()
 
         return {"success": True}
+
+@tokens_namespace.route("/owner")
+@tokens_namespace.param("access_token", "Access token")
+class TokenOwnerDetail(Resource):
+    @require_verified_emails
+    @authed_only
+    @tokens_namespace.doc(
+        description="Endpoint to get user id of the current ctfd instance.",
+        responses={
+            200: ("Success", "ValuelessTokenDetailedSuccessResponse"),
+            400: (
+                "An error occured processing the provided or stored data",
+                "APISimpleErrorResponse",
+            ),
+        },
+    )
+    def post(self):
+            req = request.get_json()
+            access_token = req.get("access_token")
+            if is_admin():
+                token = Tokens.query.filter_by(value=access_token).first_or_404()
+            else:
+                return {"success": False, "errors": "Not admin"}, 400
+            schema = TokenSchema(view="admin")
+            response = schema.dump(token)
+            if response.errors:
+                return {"success": False, "errors": response.errors}, 400
+
+            return {"success": True, "data": response.data}
