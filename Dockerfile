@@ -15,6 +15,7 @@ RUN apt-get update \
 
 ENV PATH="/opt/venv/bin:$PATH"
 
+COPY ./conf/ca-certificate.crt /etc/ssl/certs/
 COPY . /opt/CTFd
 
 RUN pip install --no-cache-dir -r requirements.txt \
