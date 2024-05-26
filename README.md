@@ -56,6 +56,15 @@ Or you can use Docker Compose with the following command from the source reposit
 
 Check out the [CTFd docs](https://docs.ctfd.io/) for [deployment options](https://docs.ctfd.io/docs/deployment/installation) and the [Getting Started](https://docs.ctfd.io/tutorials/getting-started/) guide
 
+### Using kubernetes 
+
+make `ctfd-secret.yaml` with appropriate values
+`kubectl apply -f ctfd-config.yaml`
+`kubectl apply -f ctfd-secret.yaml`
+`kubectl apply -f ctfd-deployment.yaml`
+
+or just run `kubernetes-deploy.sh`
+
 ## Live Demo
 
 https://demo.ctfd.io/

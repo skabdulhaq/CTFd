@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctfd-deployment
+  labels:
+    app: ctfd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ctfd
+  template:
+    metadata:
+      labels:
+        app: ctfd
+    spec:
+      containers:
+      - name: ctfd
+        image: registry.digitalocean.com/ctf-containers/ctfd:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ctfd-secret
+              key: database-url
+
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: ctfd-secret
+              key: redis-url 
+         
+        - name: UPLOAD_FOLDER
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: upload-folder
+
+        - name: WORKERS
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: workers
+
+        - name: LOG_FOLDER
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: log-folder
+
+        - name: REVERSE_PROXY
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: reverse-proxy
+
+
+        - name: ACCESS_LOG
+          value: -
+
+        - name: ERROR_LOG
+          value: -
+         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctfd-service-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: ctfd
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30010
