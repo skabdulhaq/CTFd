@@ -7,4 +7,4 @@ data:
   upload-folder: /var/uploads
   workers: "1"
   log-folder: /var/log/CTFd
-  reverse-proxy: false
+  reverse-proxy: "false"

@@ -58,11 +58,22 @@ spec:
 
 
         - name: ACCESS_LOG
-          value: -
+          value: "-"
 
         - name: ERROR_LOG
-          value: -
-         
+          value: "-"
+
+        volumeMounts:
+        - name: log-volume
+          mountPath: .data/CTFd/logs
+          
+        - name: uploads-volume
+          mountPath: .data/CTFd/uploads
+        
+        volumes:
+        - name: log-volume
+        - name: uploads-volume
+          
 ---
 apiVersion: v1
 kind: Service
