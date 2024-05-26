@@ -107,6 +107,7 @@ marshmallow==2.20.2
     #   marshmallow-sqlalchemy
 marshmallow-sqlalchemy==0.17.0
     # via -r requirements.in
+mysql-connector-python
 maxminddb==1.5.4
     # via
     #   -r requirements.in
