@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ctfd
-        image: registry.digitalocean.com/ctf-containers/ctfd:latest
+        image: ctfd/ctfd:3.7.0
         ports:
         - containerPort: 8000
         env:
