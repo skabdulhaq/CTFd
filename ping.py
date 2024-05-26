@@ -18,13 +18,19 @@ if url.drivername.startswith("sqlite"):
 # Null out the database so raw_connection doesnt error if it doesnt exist
 # CTFd will create the database if it doesnt exist
 url = url._replace(database=None)
-
+connect_args = {
+    "ssl": {
+        "ssl_ca": "/etc/ssl/certs/ca-certificate.crt",
+    }
+}
 # Wait for the database server to be available
-engine = create_engine(url)
+engine = create_engine(url, connect_args=connect_args)
 print(f"Waiting for {url.host} to be ready")
 while True:
     try:
-        engine.raw_connection()
+        connection = engine.raw_connection()
+        print("Connection:", connection)
+
         break
     except Exception:
         print(".", end="", flush=True)

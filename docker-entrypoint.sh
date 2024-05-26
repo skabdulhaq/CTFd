@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+cp /opt/CTFd/conf/ca-certificate.crt /etc/ssl/certs/
 
 WORKERS=${WORKERS:-1}
 WORKER_CLASS=${WORKER_CLASS:-gevent}
