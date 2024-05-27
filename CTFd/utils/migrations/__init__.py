@@ -5,12 +5,11 @@ from pathlib import Path
 from alembic.migration import MigrationContext
 from flask import current_app as app
 from flask_migrate import Migrate, stamp
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, exc
 from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import create_database as create_database_util
 from sqlalchemy_utils import database_exists as database_exists_util
 from sqlalchemy_utils import drop_database as drop_database_util
-from time import sleep
 migrations = Migrate()
 
 
@@ -23,13 +22,14 @@ def create_database():
         url = url.update_query_dict({"charset": "utf8mb4"})
 
     # Creates database if the database database does not exist
-    sleep(10)
     if not database_exists_util(url):
-        print(database_exists_util(url), "HERE!!")
-        if url.drivername.startswith("mysql"):
-            create_database_util(url, encoding="utf8mb4")
-        else:
-            create_database_util(url)
+        try:
+            if url.drivername.startswith("mysql"):
+                create_database_util(url, encoding="utf8mb4")
+            else:
+                create_database_util(url)
+        except exc.ProgrammingError:
+            print("Failed to create database. Database likely exists.")
     return url
 
 
