@@ -26,19 +26,19 @@ if [[ "$SKIP_DB_PING" == "false" ]]; then
 fi
 
 # Initialize database
-flask db upgrade
+# flask db upgrade
 
 # Start CTFd
-echo "Starting CTFd"
-exec gunicorn 'CTFd:create_app()' \
-    --bind '0.0.0.0:8000' \
-    --workers $WORKERS \
-    --worker-tmp-dir "$WORKER_TEMP_DIR" \
-    --worker-class "$WORKER_CLASS" \
-    --access-logfile "$ACCESS_LOG" \
-    --error-logfile "$ERROR_LOG"
+# echo "Starting CTFd"
+# exec gunicorn 'CTFd:create_app()' \
+#     --bind '0.0.0.0:8000' \
+#     --workers $WORKERS \
+#     --worker-tmp-dir "$WORKER_TEMP_DIR" \
+#     --worker-class "$WORKER_CLASS" \
+#     --access-logfile "$ACCESS_LOG" \
+#     --error-logfile "$ERROR_LOG"
 
-# while true
-# do
-#   echo "asdasdasd"
-# done
+while true
+do
+  echo "asdasdasd"
+done
