@@ -37,8 +37,3 @@ fi
 #     --worker-class "$WORKER_CLASS" \
 #     --access-logfile "$ACCESS_LOG" \
 #     --error-logfile "$ERROR_LOG"
-
-while true
-do
-  echo "asdasdasd"
-done
