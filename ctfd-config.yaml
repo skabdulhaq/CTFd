@@ -5,6 +5,6 @@ metadata:
 data:
   ctfd-url: ctfd-service
   upload-folder: /var/uploads
-  workers: "1"
+  workers: "9"
   log-folder: /var/log/CTFd
   reverse-proxy: "false"

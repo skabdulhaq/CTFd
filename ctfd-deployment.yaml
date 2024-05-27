@@ -26,6 +26,12 @@ spec:
               name: ctfd-secret
               key: database-url
 
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ctfd-secret
+              key: secret-key
+
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
