@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ctfd
 spec:
-  replicas: 2
+  replicas: 1 
   selector:
     matchLabels:
       app: ctfd
@@ -17,6 +17,10 @@ spec:
       containers:
       - name: ctfd
         image: registry.digitalocean.com/ctf-containers/ctfd
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
         ports:
         - containerPort: 8000
         env:
@@ -37,7 +41,49 @@ spec:
             secretKeyRef:
               name: ctfd-secret
               key: redis-url 
-         
+              
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: ctfd-secret
+              key: aws-access-key-id 
+
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ctfd-secret
+              key: aws-secret-access-key 
+
+        - name: AWS_S3_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: aws-s3-bucket 
+
+        - name: AWS_S3_ENDPOINT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: aws-s3-endpoint-url 
+        
+        - name: UPLOAD_PROVIDER
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: upload-provider 
+              
+        - name: AWS_S3_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: aws-s3-region 
+
+        - name: AWS_S3_CUSTOM_PREFIX
+          valueFrom:
+            configMapKeyRef:
+              name: ctfd-config
+              key: aws-s3-prefix 
+
         - name: UPLOAD_FOLDER
           valueFrom:
             configMapKeyRef:
@@ -91,6 +137,6 @@ spec:
     app: ctfd
   ports:
     - protocol: TCP
-      port: 8000
+      port: 80
       targetPort: 8000
       nodePort: 30010

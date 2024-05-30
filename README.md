@@ -56,7 +56,15 @@ Or you can use Docker Compose with the following command from the source reposit
 
 Check out the [CTFd docs](https://docs.ctfd.io/) for [deployment options](https://docs.ctfd.io/docs/deployment/installation) and the [Getting Started](https://docs.ctfd.io/tutorials/getting-started/) guide
 
-### Using kubernetes 
+### Using kubernetes
+
+Before this makesure that you have the following
+
+- make a k8 cluster in digitalocean.
+- Install Kubernetes Metrics Server can be found in your cluster's marketplace.
+- make a new mysql and redis database in digital ocean's managed Databases.
+- make a s3 bucket in digitalocean
+- install kubectl, doctl on your local machine (to safely apply secrets to Kubernetes)
 
 make `ctfd-secret.yaml` with appropriate values
 `kubectl apply -f ctfd-config.yaml`

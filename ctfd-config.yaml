@@ -5,6 +5,11 @@ metadata:
 data:
   ctfd-url: ctfd-service
   upload-folder: /var/uploads
-  workers: "9"
+  workers: "3" # 2 * Total cpu cores + 1
   log-folder: /var/log/CTFd
   reverse-proxy: "false"
+  aws-s3-bucket: 1nf1n1ty
+  aws-s3-endpoint-url: "https://blr1.digitaloceanspaces.com"
+  aws-s3-region: "blr1"
+  aws-s3-prefix: "ctf2024"
+  upload-provider: "s3"
