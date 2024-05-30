@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile.web
+          file: ./Dockerfile
           push: true
           tags:  ${{ secrets.DOCKERHUB_USERNAME }}/ctfd:${{ github.sha }} ,  ${{ secrets.DOCKERHUB_USERNAME }}/ctfd:latest
           
