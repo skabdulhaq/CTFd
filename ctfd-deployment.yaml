@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ctfd
-        image: registry.digitalocean.com/ctf-containers/ctfd
+        image: team1nf1n1ty/ctfd
         resources:
           requests:
             cpu: 100m
