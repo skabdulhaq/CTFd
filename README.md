@@ -65,7 +65,7 @@ Before this makesure that you have the following
 - make a new mysql and redis database in digital ocean's managed Databases.
 - make a s3 bucket in digitalocean
 - install kubectl, doctl on your local machine (to safely apply secrets to Kubernetes)
-
+![alt text](image.png)
 make `ctfd-secret.yaml` with appropriate values
 `kubectl apply -f ctfd-config.yaml`
 `kubectl apply -f ctfd-secret.yaml`
