@@ -32,8 +32,9 @@ while True:
         print("Connection:", connection)
 
         break
-    except Exception:
-        print(".", end="", flush=True)
+    except Exception as e:
+        print(e)
+        print("Waiting 1s for database connection")
         time.sleep(1)
 
 print(f"{url.host} is ready")
