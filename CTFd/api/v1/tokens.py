@@ -148,6 +148,7 @@ class TokenDetail(Resource):
         else:
             user = get_current_user()
             token = Tokens.query.filter_by(id=token_id, user_id=user.id).first_or_404()
+            print("TOKEN: ",token)
             if token.description == "launchpad":
                 return {"success": False, "error": "Can't delete this key"}
             
