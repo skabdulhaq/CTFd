@@ -156,7 +156,7 @@ class TokenDetail(Resource):
         db.session.commit()
         db.session.close()
 
-        return {"success": True}
+        return {"success": True, "token": token}
 
 @tokens_namespace.route("/owner")
 @tokens_namespace.param("access_token", "Access token")
